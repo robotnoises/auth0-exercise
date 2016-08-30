@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static(__dirname + '/client'));
 
 app.use(session({ 
   'secret': clientSecret, 
@@ -46,11 +47,11 @@ function authStrategyHandler(accessToken, refreshToken, extraParams, profile, do
 
 passport.use(new Auth0Strategy(strategyOptions, authStrategyHandler));
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   done(null, user); // Todo: This is not a best practice
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser((user, done) => {
   done(null, user); // Todo: This is not a best practice
 });
 
