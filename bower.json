@@ -1,0 +1,24 @@
+{
+  "name": "exercise",
+  "description": "An Auth0 exercise",
+  "main": "app.js",
+  "authors": [
+    "David Nichols"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.8",
+    "angular-route": "^1.5.8",
+    "concise": "^3.4.0"
+  }
+}
