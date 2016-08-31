@@ -81,6 +81,6 @@ app.get('/callback', passport.authenticate('auth0', { failureRedirect: '/login' 
   res.redirect('/app');
 });
 
-app.all('*', secure, (req, res) => {
+app.get('/', secure, (req, res) => {
   res.redirect('/app');
 });
