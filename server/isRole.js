@@ -25,7 +25,7 @@ module.exports = (role, req, res, next) => {
     return false;
   }
 
-  if (req.isAuthenticated() && hasRole(role, req.user._json)) {
+  if (req.isAuthenticated() && hasRole(role, req.user._json.roles)) {
     next();
   } else {
     return res.status(403).send('Not Authorized');
