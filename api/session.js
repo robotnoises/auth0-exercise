@@ -6,9 +6,8 @@ module.exports = (router) => {
   // /session/logout => Log-out the current user
   router.get('/session/logout', isAuth, (req, res) => {
     request.get({
-      'url': 'https://robotnoises.auth0.com/logout',
+      'url': 'https://robotnoises.auth0.com/v2/logout',
       'qs': {
-        'return_to': '/login',
         'client_id': req.user._json.clientId
       }
     }, (error, response) => {
