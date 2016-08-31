@@ -1,16 +1,10 @@
 var passport = require('passport');
+var secureRoute = require('./../server/secureRoute');
 
 module.exports = (router) => {
   
-  // /callback => Handle Auth0 new session callback
-  router.get('/callback', 
-    passport.authenticate('auth0', { failureRedirect: '/client/#/session' }),
-    (req, res)  => {
-      if (!req.user) {
-        throw new Error('user null');
-      }
-      res.redirect("/user");
-    });
+  // /user => Get currently logged-in user's information
+  router.get('/user', secureRoute, (req, res) => {
+    res.json(req.user || {});
+  });
 };
-
-

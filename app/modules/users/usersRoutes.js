@@ -15,7 +15,6 @@
     $routeProvider.when('/', {
       redirectTo: '/users'
     });
-
   }]);
   
 })(angular);

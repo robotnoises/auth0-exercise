@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
 var config = require('./config');
+var secure = require('./server/secureRoute');
 var Auth0Strategy = require('passport-auth0');
 
 const app = express();
@@ -18,17 +19,15 @@ const clientSecret = process.env.AUTH0_CLIENT_SECRET || '';
  */
 
 app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(session({'secret': clientSecret, 'resave': false, 'saveUninitialized': false}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(__dirname + '/client'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(session({ 
-  'secret': clientSecret, 
-  'resave': false, 
-  'saveUninitialized': false 
-}));
+// Static assets
+app.use('/public', express.static(__dirname + '/public'));
+app.use('/app', secure, express.static(__dirname + '/app'));
 
 /**
  * Config passport
@@ -61,5 +60,27 @@ passport.deserializeUser((user, done) => {
 
 app.listen(process.env.PORT || 8080, () => {
   console.log('Server started.');
+
+  // Wire-up the API
   require('./api')(app);
+});
+
+/**
+ * Routes
+ */
+
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + '/public/login.html')
+});
+
+app.get('/callback', passport.authenticate('auth0', { failureRedirect: '/login' }), (req, res) => {
+  if (!req.user) {
+    throw new Error('user null');
+  }
+  // We good.
+  res.redirect('/app');
+});
+
+app.all('*', secure, (req, res) => {
+  res.redirect('/app');
 });
