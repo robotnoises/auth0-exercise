@@ -1,18 +1,10 @@
-var passport = require('passport');
 var request = require('request');
-var secure = require('./../server/secureRoute');
+var isAuth = require('./../server/isAuth');
 
 module.exports = (router) => {
-  
-  // Todo: securing these routes may be unnecssary now that app.all('*' ...) is secure
-
-  // /session/user => Get currently logged-in user's information
-  router.get('/user', secure, (req, res) => {
-    res.json(req.user || {});
-  });
 
   // /session/logout => Log-out the current user
-  router.get('/logout', secure, (req, res) => {
+  router.get('/session/logout', isAuth, (req, res) => {
     request.get({
       'url': 'https://robotnoises.auth0.com/logout',
       'qs': {

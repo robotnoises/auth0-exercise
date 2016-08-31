@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
 var config = require('./config');
-var secure = require('./server/secureRoute');
+var isAuth = require('./server/isAuth');
 var Auth0Strategy = require('passport-auth0');
 
 const app = express();
@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Static assets
 app.use('/public', express.static(__dirname + '/public'));
-app.use('/app', secure, express.static(__dirname + '/app'));
+app.use('/app', isAuth, express.static(__dirname + '/app'));
 
 /**
  * Config passport
@@ -81,6 +81,6 @@ app.get('/callback', passport.authenticate('auth0', { failureRedirect: '/login' 
   res.redirect('/app');
 });
 
-app.get('/', secure, (req, res) => {
+app.get('/', isAuth, (req, res) => {
   res.redirect('/app');
 });
