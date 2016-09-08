@@ -9,8 +9,7 @@
   function authService($rootScope, lock, authManager) {
 
     var userProfile = JSON.parse(localStorage.getItem('profile')) || null;
-    var authenticated = !!userProfile;
-
+  
     function login() {
       lock.show();
     }
@@ -43,7 +42,6 @@
     }
 
     return {
-      authenticated: authenticated,
       userProfile: userProfile,
       login: login,
       logout: logout,

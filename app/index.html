@@ -17,12 +17,12 @@
   <body>
     
     <div class="nav" ng-controller="authController">
-      <button class="button--pill bg-primary" ng-if="!isAuthenticated" ng-click="authService.login()">Log in</button>
-      <button class="button--pill bg-primary" ng-if="isAuthenticated" ng-click="authService.logout()">Log out</button>
+      <button class="button--xsm bg--auth0" ng-if="!isAuthenticated" ng-click="authService.login()">Log in</button>
+      <button class="button--xsm bg--auth0" ng-if="isAuthenticated" ng-click="authService.logout()">Log out</button>
     </div>
 
     <!-- Main content container -->
-    <div ng-view container></div>
+    <div ng-view container container></div>
 
     <!-- Library -->
     <script src="bower_components/angular/angular.min.js"></script>

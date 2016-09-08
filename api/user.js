@@ -1,6 +1,6 @@
 var request = require('request');
-var isRole = require('./../server/isRole');
-var isAuth = require('./../server/isAuth');
+var isRole = require('./../utilities/isRole');
+var isAuth = require('./../utilities/isAuth');
 
 module.exports = (router) => {
 

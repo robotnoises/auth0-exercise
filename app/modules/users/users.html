@@ -1,4 +1,22 @@
 <div>
-<p>hello, world! {{test}}</p>
-<p>You are logged-<span>{{isAuthenticated ? 'in' : 'out'}}</span>!</p>
+  <!-- User card -->
+  <div class="card" ng-if="isAuthenticated">
+    <div class="header">
+      <div class="header-bg">
+        <img ng-src="{{profile.picture}}">
+      </div>
+    </div>
+    <div class="content">Name: <span ng-bind="profile.name"></span></div>
+    <div class="content">Email address: <span ng-bind="profile.email"></span></div>
+    <div class="content">Nickname: <span ng-bind="profile.nickname"></span></div>
+    <div class="content">
+      Roles: 
+      <div class="indented" ng-repeat="role in profile.roles" ng-bind="role"></div>
+    </div>
+  </div>
+
+  <!-- Not authenticated -->
+  <div class="centered" ng-if="!isAuthenticated">
+    <p>Please log in to view your User Profile.</p>
+  </div>
 </div>
