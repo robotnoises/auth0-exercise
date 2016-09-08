@@ -1,12 +1,12 @@
 var request = require('request');
-var isAuth = require('./../server/isAuth');
 var isRole = require('./../server/isRole');
+var isAuth = require('./../server/isAuth');
 
 module.exports = (router) => {
 
   // /user => Get currently logged-in user's information
   router.get('/user', isAuth, (req, res) => {
-    res.json(req.user || {});
+    res.status(200).send('OK');
   });
 
   // /user/:userId => Get a specific user

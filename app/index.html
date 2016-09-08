@@ -15,20 +15,34 @@
     <link rel="stylesheet" href="assets/style/style.css">
   </head>
   <body>
+    
+    <div class="nav" ng-controller="authController">
+      <button class="button--pill bg-primary" ng-if="!isAuthenticated" ng-click="authService.login()">Log in</button>
+      <button class="button--pill bg-primary" ng-if="isAuthenticated" ng-click="authService.logout()">Log out</button>
+    </div>
 
     <!-- Main content container -->
     <div ng-view container></div>
 
-    <!-- Library-->
+    <!-- Library -->
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/auth0-lock/build/lock.js"></script>
+    <script src="bower_components/angular-lock/dist/angular-lock.js"></script>
+    <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
 
     <!-- Application-->
     <script src="index.js"></script>
+
+    <!-- Globals -->
+    <script src="globals/services/authService.js"></script>
 
     <!-- Modules -->
     <script src="modules/users/usersDependencies.js"></script>
     <script src="modules/users/usersRoutes.js"></script>
     <script src="modules/users/usersController.js"></script>
+    <script src="modules/auth/authDependencies.js"></script>
+    <!--<script src="modules/auth/authRoutes.js"></script>-->
+    <script src="modules/auth/authController.js"></script>    
   </body>
 </html>

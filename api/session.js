@@ -1,10 +1,9 @@
 var request = require('request');
-var isAuth = require('./../server/isAuth');
 
 module.exports = (router) => {
 
   // /session/logout => Log-out the current user
-  router.get('/session/logout', isAuth, (req, res) => {
+  router.get('/session/logout', (req, res) => {
     request.get({
       'url': 'https://robotnoises.auth0.com/v2/logout',
       'qs': {
