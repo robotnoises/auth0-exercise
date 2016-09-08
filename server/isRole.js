@@ -1,5 +1,7 @@
 'use strict';
 
+var jwt = require('jsonwebtoken');
+
 /**
  * isRole()
  * 
@@ -15,17 +17,32 @@
 
 module.exports = (role, req, res, next) => {
   
+  // Gather secrets
+  const clientSecret = process.env.AUTH0_CLIENT_SECRET || '';
+
+  let token;
+  let decoded = {};
+  let roles = [];
+
+  try {
+    token = req.headers.authorization.split(' ')[1];
+    decoded = jwt.verify(token, new Buffer(clientSecret, 'base64'));
+    roles = decoded.roles || [];
+  } catch (ex) {
+    console.error(ex);
+  }
+
   // Check user's list of roles for a specific role
   function hasRole(role, roles) {
-    roles.forEach((r) => {
-      if (r === role) {
+    for (var i = 0, max = roles.length; i < max ; i++) {
+      if (roles[i] === role) {
         return true;
       }
-    });
+    }
     return false;
   }
 
-  if (req.isAuthenticated() && hasRole(role, req.user._json.roles)) {
+  if (token && hasRole(role, roles)) {
     next();
   } else {
     return res.status(403).send('Not Authorized');

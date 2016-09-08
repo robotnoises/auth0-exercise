@@ -12,7 +12,14 @@ function ($httpProvider, lockProvider, jwtOptionsProvider, jwtInterceptorProvide
   // Init provider for Auth0 Lock Widget
   lockProvider.init({
     clientID: 'yYK1wf6fwwSOht7vyaRImwBJlM7NI0oV',
-    domain: 'robotnoises.auth0.com'
+    domain: 'robotnoises.auth0.com',
+    options: {
+      auth: {
+        params: {
+          scope: 'openid roles'
+        }
+      }
+    }
   });
 
   // Configure tokenGetter function to retrieve from localStorage

@@ -12,10 +12,12 @@ module.exports = (router) => {
   // /user/:userId => Get a specific user
   router.get('/user/:userId', isRole.bind(undefined, 'admin'), (req, res) => {
     // Todo: get a specific user by id
+    res.send('OK');
   });
 
   // /user/all => Get a list of all users
   router.get('/user/all', isRole.bind(undefined, 'admin'), (req, res) => {
     // Todo: get a list of Users
+    res.send('OK');
   });
 };
