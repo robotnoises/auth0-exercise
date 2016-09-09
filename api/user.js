@@ -8,9 +8,9 @@ module.exports = (router) => {
   // /user/all => Get a list of all users
   router.get('/user/all', isRole.bind(undefined, 'admin'), (req, res) => {
     
-    auth0.listAllUsers(req.headers.authorization)
+    auth0.listAllUsers()
       .then((response) => {
-        res.status(response.statusCode).json(response);
+        res.status(200).json(response);
       })
       .catch((error) => {
         res.status(500).json(error);
