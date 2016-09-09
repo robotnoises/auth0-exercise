@@ -1,13 +1,12 @@
 var request = require('request');
 var isRole = require('./../utilities/isRole');
 var isAuth = require('./../utilities/isAuth');
-var auth0 = require('./auth0');
+var auth0 = require('./services/auth0');
 
 module.exports = (router) => {
 
   // /user/all => Get a list of all users
   router.get('/user/all', isRole.bind(undefined, 'admin'), (req, res) => {
-    
     auth0.listAllUsers()
       .then((response) => {
         res.status(200).json(response);

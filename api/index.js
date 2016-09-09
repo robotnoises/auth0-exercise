@@ -6,6 +6,5 @@ module.exports = (app) => {
   app.use('/api/v1', router);
 
   // Include various API route controllers
-  require('./session')(router);
   require('./user')(router);
 }
