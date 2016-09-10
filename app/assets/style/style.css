@@ -43,6 +43,7 @@ html, body {
   background-color: transparent;
   color: #fff;
   overflow: visible;
+  margin-bottom: 15px;
 }
 
 .card .header img {

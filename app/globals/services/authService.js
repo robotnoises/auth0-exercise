@@ -9,7 +9,11 @@
   function authService($rootScope, lock, authManager) {
 
     var userProfile = JSON.parse(localStorage.getItem('profile')) || null;
-  
+    
+    function isAdmin() {
+      return (userProfile && Array.isArray(userProfile.roles) && userProfile.roles.includes('admin'));
+    }
+
     function login() {
       lock.show();
     }
@@ -43,6 +47,7 @@
 
     return {
       userProfile: userProfile,
+      isAdmin: isAdmin,
       login: login,
       logout: logout,
       registerAuthenticationListener: registerAuthenticationListener
