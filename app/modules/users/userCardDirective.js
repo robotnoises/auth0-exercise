@@ -25,13 +25,13 @@
         '    <fieldset>' +
         '      <legend>User Information</legend>' +
         '      <div class="content">' + 
-        '        <label for="name">Name:</label><input type="text" name="name" ng-value="profile.name" ng-disabled="!isAdmin || !expanded" placeholder="Type a name" />' +
+        '        <label for="name">Name:</label><input type="text" name="name" ng-value="profile.name" ng-model="profile.name" ng-disabled="!isAdmin || !expanded" placeholder="Type a name" />' +
         '      </div>' +
         '      <div class="content">' + 
-        '        <label for="email">Email address:</label><input type="text" name="email" ng-value="profile.email" ng-disabled="!isAdmin || !expanded" placeholder="Type an email" />' +
+        '        <label for="email">Email address:</label><input type="text" name="email" ng-value="profile.email" ng-model="profile.email" ng-disabled="!isAdmin || !expanded" placeholder="Type an email" />' +
         '      </div>' +
         '      <div class="content" ng-show="expanded">' + 
-        '        <label for="nickname">Nickname:</label><input type="text" name="nickname" ng-value="profile.nickname" ng-disabled="!isAdmin || !expanded" placeholder="Type a nickname" />' +
+        '        <label for="nickname">Nickname:</label><input type="text" name="nickname" ng-value="profile.nickname" ng-model="profile.nickname" ng-disabled="!isAdmin || !expanded" placeholder="Type a nickname" />' +
         '      </div>' +
         '      <div class="content" ng-show="expanded">' +
         '        Roles:' +
@@ -44,7 +44,7 @@
         '      <button class="button--xsm bg-yellow" ng-click="viewDetails()">Edit {{profile.name}}</button>' +
         '    </div>' +
         '  </div>' +
-        '  <button class="button-lg bg-green big" ng-if="expanded && isAdmin">Save Changes</button>' +
+        '  <button class="button-lg bg-green big" ng-if="expanded && isAdmin" ng-click="update()">Save Changes</button>' +
         '  <button class="button-lg bg-red big" ng-if="expanded && isAdmin" ng-click="delete()">Delete User</button>' +
         '</div>',
       link: function (scope, element, attrs) {
@@ -63,7 +63,10 @@
         };
 
         scope.update = function () {
-          // Todo
+          auth0ApiService.updateUser(scope.profile)
+            .catch(function (error) {
+              console.error(error);
+            });
         };
 
         scope.delete = function () {
