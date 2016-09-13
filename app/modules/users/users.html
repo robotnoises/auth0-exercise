@@ -4,14 +4,14 @@
   <div ng-hide="loaded" class="spinkit-spinner"></div>
 
   <!-- Notifications Banner -->
-  <div class="banner" ng-if="isAuth">
+  <div class="banner" ng-if="isAuth && loaded">
     <p ng-if="isAuth && !isAdmin">Since you're just a lowly User, all you can do is view your own profile. Sorry.</p>
     <p ng-if="isAuth && isAdmin">Almighty Admin, you may choose any profile to view or edit.</p>
   </div>
 
   <!-- Authenticated -->
   <div ng-if="isAuthenticated">
-    <user-card ng-repeat="profile in profiles" profile="profile" expand="expandCard" edit="canEdit"></user-card>
+    <user-card ng-repeat="profile in profiles" profile="profile" expand="expandCard" showeditbtn="showEditBtn" admin="isAdmin"></user-card>
   </div>
 
   <!-- Not authenticated -->

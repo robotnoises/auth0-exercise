@@ -84,9 +84,21 @@ html, body {
   font-size: 12px;
 }
 
+/* Forms */
+
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+legend {
+  font-weight: 600;
+  font-size: 14px;
+}
+
 /* Buttons */
 
-button.bg--auth0 {
+button.bg-auth0 {
   background-color: transparent;
 }
 
@@ -94,9 +106,22 @@ button.bg-yellow {
   background-color: #f1c40f;
 }
 
-button.bg--auth0:hover,
-button.bg--auth0:active {
+button.bg-grey {
+  background-color: #2ecc71;
+  color: #fff;
+}
+
+button.bg-auth0:hover,
+button.bg-auth0:active {
   color: rgba(255,255,255,0.75);
+}
+
+button.big {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 25px auto;
+  font-weight: 800;
 }
 
 /* Loading/Spinner */

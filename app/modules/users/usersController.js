@@ -12,7 +12,7 @@
       $scope.isAuth = $rootScope.isAuthenticated;
       $scope.isAdmin = authService.isAdmin();
       $scope.profiles = [];
-      $scope.canEdit = !$routeParams.userId && $scope.isAuth && $scope.isAdmin;
+      $scope.showEditBtn = !$routeParams.userId && $scope.isAuth && $scope.isAdmin;
       $scope.expandCard = !!$routeParams.userId || !$scope.isAdmin;
       $scope.loaded = false;
 
