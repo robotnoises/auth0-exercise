@@ -6,19 +6,24 @@
   
   .config(['$routeProvider', function ($routeProvider) {
 
-    $routeProvider.when('/users/:userId', {
+    $routeProvider.when('/user/:action/:id', {
       controller: 'usersController',
       templateUrl: 'modules/users/users.html'
     });
 
-    $routeProvider.when('/users', {
+    $routeProvider.when('/user/:action', {
+      controller: 'usersController',
+      templateUrl: 'modules/users/users.html'
+    });
+
+    $routeProvider.when('/user', {
       controller: 'usersController',
       templateUrl: 'modules/users/users.html'
     });
 
     // Redirect
     $routeProvider.when('/', {
-      redirectTo: '/users'
+      redirectTo: '/user'
     });
   }]);
   

@@ -9,9 +9,10 @@
       
       // Scope properties
 
+      $scope.profiles = [];
+      $scope.action = $routeParams.action || 'viewall';
       $scope.isAuth = $rootScope.isAuthenticated;
       $scope.isAdmin = false;
-      $scope.profiles = [];
       $scope.showEditBtn = false;
       $scope.expandCard = false;
       $scope.loaded = false;
@@ -23,17 +24,17 @@
       function init() {
         // Set some flags
         $scope.isAdmin = authService.isAdmin();
-        $scope.showEditBtn = !$routeParams.userId && $scope.isAuth && $scope.isAdmin;
-        $scope.expandCard = !!$routeParams.userId || !$scope.isAdmin;
+        $scope.showEditBtn = $scope.action === 'viewall' && !$routeParams.id && $scope.isAuth && $scope.isAdmin;
+        $scope.expandCard = !!$routeParams.id || !$scope.isAdmin || $scope.action === 'create';
 
         // If the user is not an Admin, just load it from localStorage
         if (!$scope.isAdmin) {
           $scope.profiles = [];
           $scope.profiles.push(authService.getUserProfile());
           $scope.loaded = true;
-        } else {
+        } else if ($scope.action === 'viewall' || $scope.action === 'edit') {
           // Fetch a list of users or a specific user from Auth0
-          auth0ApiService.getUserOrUsers($routeParams.userId)
+          auth0ApiService.getUserOrUsers($routeParams.id)
             .then(function (data) {
               $scope.profiles = data;
             })
@@ -43,6 +44,10 @@
             .finally(function () {
               $scope.loaded = true;
             });
+        } else {
+          // We're creating a new User
+          $scope.profiles.push({});
+          $scope.loaded = true;
         }
       }
 

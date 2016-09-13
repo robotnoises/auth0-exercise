@@ -9,13 +9,18 @@
     <p ng-if="isAuth && isAdmin">Almighty Admin, you may choose any profile to view or edit.</p>
   </div>
 
+  <!-- Admin Menu -->
+  <div ng-show="loaded" ng-if="isAdmin && action === 'viewall'">
+    <button class="big bg-grey" ng-click="goTo('user/create')">Create a New User</button>
+  </div>
+
   <!-- Authenticated -->
-  <div ng-if="isAuthenticated">
+  <div ng-if="isAuth">
     <user-card ng-repeat="profile in profiles" profile="profile" expand="expandCard" showeditbtn="showEditBtn" admin="isAdmin"></user-card>
   </div>
 
   <!-- Not authenticated -->
-  <div class="centered" ng-if="!isAuthenticated">
+  <div class="centered" ng-if="!isAuth">
     <p>Please log in to view your User Profile.</p>
   </div>
 </div>
