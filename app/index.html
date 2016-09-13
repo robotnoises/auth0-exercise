@@ -17,8 +17,9 @@
   <body>
     
     <div class="nav" ng-controller="authController">
-      <button class="button--xsm bg-auth0" ng-if="!isAuthenticated" ng-click="authService.login()">Log in</button>
-      <button class="button--xsm bg-auth0" ng-if="isAuthenticated" ng-click="authService.logout()">Log out</button>
+      <button class="button--sm bg-auth0 title" ng-click="goTo('/')">Auth0 Exercise</button>
+      <button class="button--sm bg-auth0" ng-if="!isAuthenticated" ng-click="authService.login()">Log in</button>
+      <button class="button--sm bg-auth0" ng-if="isAuthenticated" ng-click="authService.logout()">Log out</button>
     </div>
 
     <!-- Main content container -->

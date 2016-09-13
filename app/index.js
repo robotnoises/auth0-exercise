@@ -32,8 +32,13 @@ function ($httpProvider, lockProvider, jwtOptionsProvider, jwtInterceptorProvide
   // Interceptor for subsequent requests
   $httpProvider.interceptors.push('jwtInterceptor');
 }])
-.run(function ($rootScope, authService, authManager) {
-  $rootScope.authService = authService;
+.run(function ($rootScope, $location, authService, authManager) {
   authService.registerAuthenticationListener();
   authManager.checkAuthOnRefresh();
+
+  $rootScope.authService = authService;
+  
+  $rootScope.goTo = function (path) {
+    $location.path(path);
+  };
 });
