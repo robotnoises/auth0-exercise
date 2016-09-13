@@ -25,14 +25,16 @@
         '  <div class="content" ng-show="expanded">Nickname: <span ng-bind="profile.nickname"></span></div>' +
         '  <div class="content" ng-show="expanded">' +
         '    Roles:' +
-        '    <div class="indented" ng-repeat="role in profile.roles" ng-bind="role"></div>' +
+        '    <div class="indented" ng-repeat="role in profile.app_metadata.roles">' + 
+        '    <p ng-bind="role"></p>' +
+        '    </div>' +
         '  </div>' +
         '  <div class="content" ng-show="!expanded && edit">' +
-        '    <button class="button--xsm" ng-click="edit()">Edit {{profile.name}}</button>' +
+        '    <button class="button--xsm bg-yellow" ng-click="viewDetails()">Edit {{profile.name}}</button>' +
         '  </div>' +
         '</div>',
       link: function (scope, element, attrs) {
-        scope.edit = function () {
+        scope.viewDetails = function () {
           $location.path('/users/' + scope.profile.user_id);
         };
       }

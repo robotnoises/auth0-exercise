@@ -26,7 +26,7 @@ html, body {
   display: block;
   width: 100%;
   max-width: 400px;
-  margin: 50px auto 0;
+  margin: 25px auto 0;
   background-color: #fff;
   overflow: visible;
   border: none;
@@ -68,7 +68,20 @@ html, body {
 }
 
 .card .content {
-  margin: 10px 0;
+  padding: 15px 15px 0 15px;
+}
+
+/* Banner */
+
+.banner {
+  width: 400px;
+  margin: 25px auto 50px;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: #fff;
+  opacity: 0.65;
+  padding: 15px;
+  font-size: 12px;
 }
 
 /* Buttons */
@@ -77,9 +90,44 @@ button.bg--auth0 {
   background-color: transparent;
 }
 
+button.bg-yellow {
+  background-color: #f1c40f;
+}
+
 button.bg--auth0:hover,
 button.bg--auth0:active {
   color: rgba(255,255,255,0.75);
+}
+
+/* Loading/Spinner */
+
+.spinkit-spinner {
+  width: 40px;
+  height: 40px;
+  background-color: #555;
+
+  margin: 100px auto;
+  -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+  animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-rotateplane {
+  0% { -webkit-transform: perspective(120px) }
+  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+
+@keyframes sk-rotateplane {
+  0% { 
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg) 
+  } 50% { 
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg) 
+  } 100% { 
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
 }
 
 /* Helpers */

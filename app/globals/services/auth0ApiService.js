@@ -12,10 +12,10 @@
 
     function getUserOrUsers(userId) {
       
-      var id = userId || '';
+      var id = (userId) ? '/' + userId : '';
       
       return $q(function (resolve, reject) {
-        $http.get(apiBase + '/users/' + id)
+        $http.get(apiBase + '/users' + id)
           .then(function (response) {
             if (response.data.users) {
               resolve(response.data.users);
