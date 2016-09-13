@@ -4,7 +4,7 @@
 
   angular.module('auth0-exercise')
 
-  .directive('userCard', ['$location', function ($location) {
+  .directive('userCard', ['$location', 'auth0ApiService', function ($location, auth0ApiService) {
     return {
       restrict: 'E',
       replace: true,
@@ -44,11 +44,36 @@
         '      <button class="button--xsm bg-yellow" ng-click="viewDetails()">Edit {{profile.name}}</button>' +
         '    </div>' +
         '  </div>' +
-        '  <button class="button-lg bg-grey big" ng-if="expanded && isAdmin">Save Changes</button>' +
+        '  <button class="button-lg bg-green big" ng-if="expanded && isAdmin">Save Changes</button>' +
+        '  <button class="button-lg bg-red big" ng-if="expanded && isAdmin" ng-click="delete()">Delete User</button>' +
         '</div>',
       link: function (scope, element, attrs) {
+        
+        // Todo User Model
+        scope.userModel = {};
+
+        // View the expanded version of the User card. Admins can edit/delete.
         scope.viewDetails = function () {
           $location.path('/users/' + scope.profile.user_id);
+        };
+
+        // Create a new user
+        scope.create = function () {
+          // Todo
+        };
+
+        scope.update = function () {
+          // Todo
+        };
+
+        scope.delete = function () {
+          auth0ApiService.deleteUser(scope.profile.user_id)
+            .then(function () {
+              $location.path('/');
+            })
+            .catch(function (error) {
+              console.error(error);
+            });
         };
       }
     }

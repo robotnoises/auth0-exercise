@@ -9,7 +9,7 @@
   var apiBase = '/api/v1';
 
   function auth0ApiService($http, $q) {
-
+    
     function getUserOrUsers(userId) {
       
       var id = (userId) ? '/' + userId : '';
@@ -27,12 +27,28 @@
           })
           .catch(function(error) {
             reject(error);
+          });
+      }); 
+    }
+
+    function deleteUser(userId) {
+      
+      var id = (userId) ? '/' + userId : '';
+      
+      return $q(function (resolve, reject) {
+        $http.delete(apiBase + '/users' + id)
+          .then(function (response) {
+            resolve(response);
           })
+          .catch(function(error) {
+            reject(error);
+          });
       }); 
     }
     
     return {
-      getUserOrUsers: getUserOrUsers
+      getUserOrUsers: getUserOrUsers,
+      deleteUser: deleteUser
     }
   }
 })(angular);

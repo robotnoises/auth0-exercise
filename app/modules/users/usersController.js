@@ -10,40 +10,49 @@
       // Scope properties
 
       $scope.isAuth = $rootScope.isAuthenticated;
-      $scope.isAdmin = authService.isAdmin();
+      $scope.isAdmin = false;
       $scope.profiles = [];
-      $scope.showEditBtn = !$routeParams.userId && $scope.isAuth && $scope.isAdmin;
-      $scope.expandCard = !!$routeParams.userId || !$scope.isAdmin;
+      $scope.showEditBtn = false;
+      $scope.expandCard = false;
       $scope.loaded = false;
 
       // Scope methods
       
       // Init
       
-      if (!$scope.isAdmin) {
-        $scope.profiles.push(authService.userProfile);
-        $scope.loaded = true;
-      } else if ($scope.isAdmin) {
-        auth0ApiService.getUserOrUsers($routeParams.userId)
-          .then(function (data) {
-            $scope.profiles = data;
-          })
-          .catch(function (error) {
-            console.error(error);
-          })
-          .finally(function () {
-            $scope.loaded = true;
-          }); 
+      function init() {
+        // Set some flags
+        $scope.isAdmin = authService.isAdmin();
+        $scope.showEditBtn = !$routeParams.userId && $scope.isAuth && $scope.isAdmin;
+        $scope.expandCard = !!$routeParams.userId || !$scope.isAdmin;
+
+        // If the user is not an Admin, just load it from localStorage
+        if (!$scope.isAdmin) {
+          $scope.profiles = [];
+          $scope.profiles.push(authService.getUserProfile());
+          $scope.loaded = true;
+        } else {
+          // Fetch a list of users or a specific user from Auth0
+          auth0ApiService.getUserOrUsers($routeParams.userId)
+            .then(function (data) {
+              $scope.profiles = data;
+            })
+            .catch(function (error) {
+              console.error(error);
+            })
+            .finally(function () {
+              $scope.loaded = true;
+            });
+        }
       }
 
-      $rootScope.$on('userProfileSet', function ($event, profile) {
-        $scope.profiles = [];
-        $scope.profiles.push(profile);
-      });
+      $rootScope.$on('userProfileSet', init);
 
       $rootScope.$watch('isAuthenticated', function (auth) {
         $scope.isAuth = auth || false;
       });
+
+      init();
     }]);
 
 } (angular))

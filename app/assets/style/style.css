@@ -106,8 +106,18 @@ button.bg-yellow {
   background-color: #f1c40f;
 }
 
-button.bg-grey {
+button.bg-green {
   background-color: #2ecc71;
+  color: #fff;
+}
+
+button.bg-grey {
+  background-color: #ddd;
+  color: #555;
+}
+
+button.bg-red {
+  background-color: #e74c3c;
   color: #fff;
 }
 
