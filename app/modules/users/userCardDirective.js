@@ -24,7 +24,7 @@
         '    </div>' +
         '    <fieldset>' +
         '      <legend>User Information</legend>' +
-        '      <div class="content">' + 
+        '      <div class="content" ng-if="!newProfile">' + 
         '        <label for="name">Name:</label><input type="text" name="name" ng-value="profile.name" ng-model="profile.name" ng-disabled="!isAdmin || !expanded" placeholder="Type a name" />' +
         '      </div>' +
         '      <div class="content">' + 
@@ -33,7 +33,7 @@
         '      <div class="content" ng-if="newProfile">' + 
         '        <label for="password">Password:</label><input type="password" name="email" ng-value="profile.password" ng-model="profile.password" ng-disabled="!isAdmin || !expanded" placeholder="Choose a password" />' +
         '      </div>' +
-        '      <div class="content" ng-show="expanded">' + 
+        '      <div class="content" ng-if="!newProfile" ng-show="expanded">' + 
         '        <label for="nickname">Nickname:</label><input type="text" name="nickname" ng-value="profile.nickname" ng-model="profile.nickname" ng-disabled="!isAdmin || !expanded" placeholder="Type a nickname" />' +
         '      </div>' +
         '      <div class="content" ng-show="expanded && !newProfile">' +
@@ -47,7 +47,7 @@
         '      <button class="button--xsm bg-yellow" ng-click="viewDetails()">Edit {{profile.name}}</button>' +
         '    </div>' +
         '  </div>' +
-        '  <button class="button-lg bg-green big" ng-if="expanded && isAdmin" ng-click="save()">Save Changes</button>' +
+        '  <button class="button-lg bg-green big" ng-if="expanded && isAdmin" ng-click="save()"><span ng-hide="newProfile">Save Changes</span><span ng-show="newProfile">Create User</span></button>' +
         '  <button class="button-lg bg-red big" ng-if="expanded && isAdmin && !newProfile" ng-click="delete()">Delete User</button>' +
         '</div>',
       link: function (scope, element, attrs) {
