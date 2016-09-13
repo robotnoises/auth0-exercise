@@ -27,7 +27,6 @@
       localStorage.removeItem('id_token');
       localStorage.removeItem('profile');
       authManager.unauthenticate();
-      userProfile = null;
     }
 
     // Set up the logic for when a user authenticates
