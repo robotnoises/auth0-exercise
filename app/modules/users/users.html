@@ -6,7 +6,7 @@
   <div ng-hide="loaded" class="spinkit-spinner"></div>
 
   <!-- Notifications Banner -->
-  <banner admin="isAdmin"></banner>
+  <banner ng-if="isAuth" admin="isAdmin"></banner>
 
   <!-- Admin Menu -->
   <div ng-show="loaded" ng-if="isAuth && isAdmin && action === 'viewall'">
