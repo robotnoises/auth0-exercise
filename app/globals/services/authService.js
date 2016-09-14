@@ -4,9 +4,9 @@
 
   angular.module('auth0-exercise').service('authService', authService);
 
-  authService.$inject = ['$rootScope', 'lock', 'authManager'];
+  authService.$inject = ['$rootScope', 'lock', 'authManager', '$window'];
 
-  function authService($rootScope, lock, authManager) {
+  function authService($rootScope, lock, authManager, $window) {
 
     function getUserProfile() {
       return JSON.parse(localStorage.getItem('profile')) || null;
@@ -27,6 +27,7 @@
       localStorage.removeItem('id_token');
       localStorage.removeItem('profile');
       authManager.unauthenticate();
+      $window.location.href = 'https://robotnoises.auth0.com/v2/logout?redirectTo=' + encodeURI($window.location.origin);
     }
 
     // Set up the logic for when a user authenticates
