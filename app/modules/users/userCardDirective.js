@@ -23,28 +23,28 @@
         '      </div>' +
         '    </div>' +
         '    <fieldset>' +
-        '      <legend>User Information</legend>' +
-        '      <div class="content" ng-if="!newProfile">' + 
-        '        <label for="name">Name:</label><input type="text" name="name" ng-value="profile.name" ng-model="profile.name" ng-disabled="!isAdmin || !expanded" placeholder="Type a name" />' +
-        '      </div>' +
+        '      <legend ng-show="expanded">User Information</legend>' +
         '      <div class="content">' + 
-        '        <label for="email">Email address:</label><input type="text" name="email" ng-value="profile.email" ng-model="profile.email" ng-disabled="!isAdmin || !expanded" placeholder="Type an email" />' +
+        '        <label for="email">Email address</label><input type="text" name="email" ng-value="profile.email" ng-model="profile.email" ng-disabled="!isAdmin || !expanded" placeholder="Type an email" />' +
+        '      </div>' +
+        '      <div class="content" ng-if="!newProfile && expanded">' + 
+        '        <label>Name</label><span ng-bind="profile.name"></span>' +
         '      </div>' +
         '      <div class="content" ng-if="newProfile">' + 
-        '        <label for="password">Password:</label><input type="password" name="email" ng-value="profile.password" ng-model="profile.password" ng-disabled="!isAdmin || !expanded" placeholder="Choose a password" />' +
+        '        <label for="password">Password</label><input type="password" name="email" ng-value="profile.password" ng-model="profile.password" ng-disabled="!isAdmin || !expanded" placeholder="Choose a password" />' +
         '      </div>' +
-        '      <div class="content" ng-if="!newProfile" ng-show="expanded">' + 
-        '        <label for="nickname">Nickname:</label><input type="text" name="nickname" ng-value="profile.nickname" ng-model="profile.nickname" ng-disabled="!isAdmin || !expanded" placeholder="Type a nickname" />' +
+        '      <div class="content" ng-if="!newProfile">' + 
+        '        <label>Verified Email</label> <span ng-bind="profile.email_verified" ng-disabled="!isAdmin || !expanded"></span>' +
         '      </div>' +
         '      <div class="content" ng-show="expanded && !newProfile">' +
-        '        Roles:' +
+        '        <label>Roles</label>' +
         '        <div class="indented" ng-repeat="role in profile.app_metadata.roles">' + 
         '          <p ng-bind="role"></p>' +
         '        </div>' +
         '      </div>' +
         '    </fieldset>' +
         '    <div class="content" ng-show="!expanded && showEditBtn">' +
-        '      <button class="button--xsm bg-yellow" ng-click="viewDetails()">Edit {{profile.name}}</button>' +
+        '      <button class="button--xsm bg-yellow" ng-click="viewDetails()">Edit</button>' +
         '    </div>' +
         '  </div>' +
         '  <button class="button-lg bg-green big" ng-if="expanded && isAdmin" ng-click="save()"><span ng-hide="newProfile">Save Changes</span><span ng-show="newProfile">Create User</span></button>' +

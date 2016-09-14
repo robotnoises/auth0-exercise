@@ -21,15 +21,16 @@ function auth0Request(method, path, body) {
   let options = {
       method: method,
       uri: `${apiBase}${path}`,
+      json: true,
       headers: {
         'Authorization': `Bearer ${apiToken}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json; charset=utf-8'
       }
   };
 
   if (body) {
-    body.connection = "Username-Password-Authentication";
-    options.body = JSON.stringify(body);
+    // body.connection = "Username-Password-Authentication";
+    options.body = body;
   }
 
   return new Promise((resolve, reject) => {
@@ -37,7 +38,7 @@ function auth0Request(method, path, body) {
       if (error) {
         reject(error);
       } else {
-        let resp = (response.body) ? JSON.parse(response.body) : response;
+        let resp = (response.body) ? response.body : response;
         resolve(resp);
       }
     });
@@ -74,7 +75,13 @@ function createUser(creds) {
 }
 
 function updateUser(userId, updates) {
-  return auth0Request('PATCH', `/users${userId}`, updates);
+  
+  let formatted = {
+    'email': updates.email,
+    'connection': updates.identities[0].connection
+  };
+
+  return auth0Request('PATCH', `/users/${userId}`, formatted);
 }
 
 function deleteUser(userId) {

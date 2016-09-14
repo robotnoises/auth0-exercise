@@ -69,6 +69,7 @@ html, body {
 
 .card .content {
   padding: 15px 15px 0 15px;
+  font-size: 12px;
 }
 
 /* Banner */
@@ -89,11 +90,18 @@ html, body {
 fieldset {
   border: none;
   padding: 0;
+  margin-bottom: 0;
 }
 
 legend {
   font-weight: 600;
+  font-size: 16px;
+}
+
+label {
   font-size: 14px;
+  color: #ccc;
+  margin-bottom: 4px;
 }
 
 /* Buttons */
@@ -173,7 +181,7 @@ button.big {
 }
 
 .indented {
-  padding-left: 25px;
+  padding-left: 12px;
 }
 
 .centered {
