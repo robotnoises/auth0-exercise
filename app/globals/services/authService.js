@@ -27,7 +27,7 @@
       localStorage.removeItem('id_token');
       localStorage.removeItem('profile');
       authManager.unauthenticate();
-      $window.location.href = 'https://robotnoises.auth0.com/v2/logout?redirectTo=' + encodeURI($window.location.origin);
+      $window.location.href = 'https://robotnoises.auth0.com/v2/logout?returnTo=' + $window.location.origin + '&client_id=yYK1wf6fwwSOht7vyaRImwBJlM7NI0oV';
     }
 
     // Set up the logic for when a user authenticates
