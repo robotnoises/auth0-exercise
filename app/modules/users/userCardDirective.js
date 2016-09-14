@@ -15,7 +15,8 @@
           profile: '=profile',
           expanded: '=expand',
           showEditBtn: '=showeditbtn',
-          isAdmin: '=admin'
+          isAdmin: '=admin',
+          saving: '=saving'
         },
         template: 
           '<div>' +
@@ -66,6 +67,9 @@
 
           // Create or Update a User
           scope.save = function () {
+
+            $rootScope.$broadcast('saving', true);
+
             var method = (scope.newProfile) ? 'createUser' : 'updateUser';
             auth0ApiService[method](scope.profile)
               .then(function () {
@@ -81,10 +85,16 @@
                   'message': msg,
                   'type': 'warning'
                 });
+              })
+              .finally(function () {
+                $rootScope.$broadcast('saving', false);
               });
           };
 
           scope.delete = function () {
+            
+            $rootScope.$broadcast('saving', true);
+
             auth0ApiService.deleteUser(scope.profile.user_id)
               .then(function () {
                 $rootScope.$broadcast('notify', {
@@ -99,7 +109,10 @@
                   'type': 'warning'
                 });
                 console.error(error);
-              });
+              })
+              .finally(function () {
+                $rootScope.$broadcast('saving', false);
+              })
           };
         }
       }

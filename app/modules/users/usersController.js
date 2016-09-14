@@ -16,6 +16,7 @@
       $scope.showEditBtn = false;
       $scope.expandCard = false;
       $scope.loaded = false;
+      $scope.saving = false;
 
       // Scope methods
       
