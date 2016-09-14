@@ -29,7 +29,6 @@ function auth0Request(method, path, body) {
   };
 
   if (body) {
-    // body.connection = "Username-Password-Authentication";
     options.body = body;
   }
 
@@ -68,7 +67,8 @@ function createUser(creds) {
   
   let requestBody = {
     email: creds.email || "",
-    password: creds.password
+    password: creds.password,
+    connection: "Username-Password-Authentication"
   };
 
   return auth0Request('POST', '/users', requestBody);
@@ -77,8 +77,8 @@ function createUser(creds) {
 function updateUser(userId, updates) {
   
   let formatted = {
-    'email': updates.email,
-    'connection': updates.identities[0].connection
+    email: updates.email,
+    connection: updates.identities[0].connection
   };
 
   return auth0Request('PATCH', `/users/${userId}`, formatted);
