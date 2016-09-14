@@ -56,7 +56,7 @@ function auth0Request(method, path, body) {
 
 function listAllUsers(page) {
   let pg = page || 0;
-  return auth0Request('GET', `/users?per_page=10&page=${pg}&include_totals=true&sort=created_at:1`);
+  return auth0Request('GET', `/users?per_page=100&page=${pg}&include_totals=true&sort=created_at:1`);
 }
 
 function getUser(userId) {

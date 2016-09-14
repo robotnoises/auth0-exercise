@@ -4,8 +4,8 @@
 
   angular.module('auth0-exercise.users')
 
-  .controller('usersController', ['$rootScope', '$scope', '$routeParams', 'authService', 'auth0ApiService',
-    function ($rootScope, $scope, $routeParams, authService, auth0ApiService) {
+  .controller('usersController', ['$rootScope', '$scope', '$routeParams', '$q', 'authService', 'auth0ApiService',
+    function ($rootScope, $scope, $routeParams, $q, authService, auth0ApiService) {
       
       // Scope properties
 
@@ -18,9 +18,17 @@
       $scope.loaded = false;
       $scope.saving = false;
 
-      // Scope methods
-      
       // Init
+
+      function waitForLocalProfile() {
+        return $q(function (resolve) {
+          if (authService.getUserProfile()) {
+            resolve();
+          } else {
+            $rootScope.$on('userProfileSet', resolve);
+          }
+        });
+      }
       
       function init() {
         // Set some flags
@@ -28,7 +36,7 @@
         $scope.showEditBtn = $scope.action === 'viewall' && !$routeParams.id && $scope.isAuth && $scope.isAdmin;
         $scope.expandCard = !!$routeParams.id || !$scope.isAdmin || $scope.action === 'create';
 
-        // If the user is not an Admin, just load it from localStorage
+        // If the user is not an Admin, just load their profile from localStorage
         if (!$scope.isAdmin) {
           $scope.profiles = [];
           $scope.profiles.push(authService.getUserProfile());
@@ -52,13 +60,13 @@
         }
       }
 
-      $rootScope.$on('userProfileSet', init);
+      // Wait for a user profile to load, then initialize
+      waitForLocalProfile().then(init);
 
+      // Watch for changes to Auth state
       $rootScope.$watch('isAuthenticated', function (auth) {
         $scope.isAuth = auth || false;
       });
-
-      init();
     }]);
 
 } (angular))
