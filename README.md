@@ -41,6 +41,6 @@ It would be helpful if there were a small explanation after completing the step 
 * In general, more presence on important channels like Stack Overflow and Youtube.
 * An Auth0 Yeoman generator for people who want to start a new project using Auth0
 * Subheadings/steps on the Quickstart pages need to stand-out more. Bigger and bolder.
-* The inline "Try" buttons that test endpoints on this page would be a killer feature if it didn't scroll to the top of the page after each test. This causes the user to have to scroll back each time they test an endpoint.
+* The inline "Try" buttons that test endpoints [on this page](https://auth0.com/docs/api/management/v2) would be a killer feature if it didn't scroll to the top of the page after each test. This causes the user to have to scroll back each time they test an endpoint.
 * You should definitely mention the API token generator in the NodeJS API Quickstart.
 * Even more abstraction. If your end goal is to rapidly onboard new Users, you should provide SDKs with full API coverage.
