@@ -1,5 +1,7 @@
 # Auth0 Documentation
 
+[https://auth0-exercise.herokuapp.com/app/](https://auth0-exercise.herokuapp.com/app/)
+
 ## Suggestions
 
 ### Suggestion #1 - A walkthrough video series on how to integrate Auth0 into your Node application
