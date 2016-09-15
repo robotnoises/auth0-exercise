@@ -1,3 +1,9 @@
+/**
+ * auth0ApiService
+ * 
+ * A service that calls various API endpoints.
+ */
+
 (function(angular) {
 
   'use strict';

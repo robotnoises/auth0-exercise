@@ -1,15 +1,12 @@
+/**
+ * banner
+ * 
+ * A directive that recieves notifications and displays them in order.
+ */
+
 (function (angular) {
 
   'use strict';
-
-  /**
-   * Notification messages must be an object of the form:
-   * 
-   * {
-   *   message: 'some notification message.',
-   *   type: 'success/warning'
-   * }
-   */
 
   angular.module('auth0-exercise')
 
@@ -35,6 +32,16 @@
           scope.dismissed = true;
         };
 
+        /**
+         * Notifications
+         * 
+         * Notification messages must be an object of the form:
+         * 
+         * {
+         *   message: 'some notification message.',
+         *   type: 'success' (or 'warning')
+         * }
+         */
         $rootScope.$on('notify', function ($event, message) {
           scope.notifications.push(message);
           scope.dismissed = false;

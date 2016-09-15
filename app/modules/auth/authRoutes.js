@@ -6,6 +6,8 @@
   
   .config(['$routeProvider', function ($routeProvider) {
     
+    // Post-Auth callabck, which redirects back to the application root
+
     $routeProvider.when('/callback', {
       redirectTo: '/users'
     });

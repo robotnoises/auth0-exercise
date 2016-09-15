@@ -15,7 +15,7 @@
 
   <!-- Authenticated -->
   <div ng-if="isAuth">
-    <user-card ng-repeat="profile in profiles" profile="profile" expand="expandCard" showeditbtn="showEditBtn" admin="isAdmin"></user-card>
+    <user-card ng-repeat="profile in profiles" profile="profile" expand="expandCard" admin="isAdmin"></user-card>
   </div>
 
   <!-- Not authenticated -->

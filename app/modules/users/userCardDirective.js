@@ -1,3 +1,9 @@
+/**
+ * user-card
+ * 
+ * Display a "User Card" in various states
+ */
+
 (function (angular) {
 
   'use strict';
@@ -7,16 +13,22 @@
   .directive('userCard', ['$rootScope', '$location', '$routeParams', 'auth0ApiService', 
     
     function ($rootScope, $location, $routeParams, auth0ApiService) {
-  
+      
+      /**
+       * This directive takes several scope properties to work:
+       * 
+       * @profile => an object containing a User profile. If it's a new profile, an empty object
+       * @expanded => boolean, whether or not to expand to show all User data
+       * @isAdmin => boolean, is the current User an admin?
+       */
+
       return {
         restrict: 'E',
         replace: true,
         scope: {
           profile: '=profile',
           expanded: '=expand',
-          showEditBtn: '=showeditbtn',
-          isAdmin: '=admin',
-          saving: '=saving'
+          isAdmin: '=admin'
         },
         template: 
           '<div>' +
@@ -47,7 +59,7 @@
           '        </div>' +
           '      </div>' +
           '    </fieldset>' +
-          '    <div class="content" ng-show="!expanded && showEditBtn">' +
+          '    <div class="content" ng-show="!expanded && isAdmin">' +
           '      <button class="button--xsm bg-yellow" ng-click="viewDetails()">Edit</button>' +
           '    </div>' +
           '  </div>' +

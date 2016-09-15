@@ -1,3 +1,7 @@
+/**
+ * Expose the authService to the navbar
+ */
+
 (function (angular) {
 
   'use strict';
